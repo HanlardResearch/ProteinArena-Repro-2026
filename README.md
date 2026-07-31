@@ -38,6 +38,20 @@ python3 -m proteinarena_repro build --profile configs/repro_2026.json --allow-un
 
 详见 [复现协议](docs/PROTOCOL.md)、[任务与模板](docs/TASKS.md)、[数据源](docs/DATA_SOURCES.md) 和 [与原文潜在不一致处](docs/DEVIATIONS.md)。
 
+## 用 GPT API 评测
+
+仓库提供一个无第三方依赖的单文件入口。只需在 `evaluate_gpt.py` 顶部填入 OpenAI API key：
+
+```bash
+# 每条轨道先跑 3 条
+python3 evaluate_gpt.py --smoke
+
+# 完整评测（产生费用前会要求确认）
+python3 evaluate_gpt.py
+```
+
+脚本覆盖 General QA、EC、CATH 和 Design，支持失败重试、断点续跑，输出逐条预测、QA judge、汇总指标和设计 FASTA。详细的论文一致项与不可复现项见 [GPT 评测说明](docs/GPT_EVALUATION.md)。
+
 ## 输出
 
 正式 release 目录包含：
