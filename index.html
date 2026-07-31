@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ProteinArena-Repro-2026：时间感知、同源性可审计的蛋白质理解与设计基准科学复现。">
+  <title>ProteinArena-Repro-2026</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav wrap" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="ProteinArena-Repro-2026 首页"><span class="brand-mark">PA</span><span>ProteinArena-Repro-2026</span></a>
+      <div class="nav-links">
+        <a href="#explorer">数据浏览</a>
+        <a href="#protocol">复现协议</a>
+        <a href="#downloads">下载</a>
+        <a class="github-link" href="https://github.com/HanlardResearch/ProteinArena-Repro-2026">GitHub ↗</a>
+      </div>
+    </nav>
+    <div class="wrap hero-grid" id="top">
+      <section>
+        <p class="eyebrow">SCIENTIFIC REPRODUCTION · 2026 ROLLING SPLIT</p>
+        <h1>把蛋白质 benchmark<br>做成可追溯的科学对象</h1>
+        <p class="lead">遵循 ProteinArena 的时间感知与同源性感知主旨，公开候选数据、任务构造器、证据、哈希和偏差说明。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#explorer">浏览 2,637 条实例</a>
+          <a class="button" href="data/releases/repro_2026/manifest.json" download>下载 Manifest</a>
+        </div>
+        <p class="status-line"><span class="status-dot"></span><strong>Provisional release</strong> · 尚未完成历史库 MMseqs2 &lt;30% 正式门控</p>
+      </section>
+      <aside class="split-card" aria-label="时间切分协议">
+        <p class="card-label">REPRO_2026 SPLIT</p>
+        <div class="timeline">
+          <div><span>历史参考库</span><strong>≤ 2025-12-31</strong></div>
+          <div class="timeline-arrow">→</div>
+          <div><span>测试候选</span><strong>≥ 2026-01-01</strong></div>
+        </div>
+        <div class="threshold"><span>主榜同源性门槛</span><strong>max SeqID &lt; 30%</strong></div>
+        <p>论文原始 2025/2024 日期配置亦随仓库公开。</p>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap metrics" aria-label="数据集规模">
+      <article><strong id="candidate-count">1,885</strong><span>Swiss-Prot 候选</span></article>
+      <article><strong id="qa-count">481</strong><span>General QA · 16 类</span></article>
+      <article><strong id="ec-count">413</strong><span>四级 EC</span></article>
+      <article><strong id="cath-count">873</strong><span>四级 CATH proxy</span></article>
+      <article><strong id="design-count">870</strong><span>功能设计</span></article>
+    </section>
+
+    <section class="wrap section" id="explorer">
+      <div class="section-heading">
+        <div><p class="eyebrow">DATA EXPLORER</p><h2>任务实例浏览器</h2></div>
+        <p>所有答案均保留 Swiss-Prot / InterPro / Gene3D 证据；自然参考序列只用于离线评估。</p>
+      </div>
+      <div class="explorer-shell">
+        <div class="controls">
+          <div class="track-tabs" role="tablist" aria-label="任务轨道">
+            <button class="track-tab active" data-track="general_qa" role="tab" aria-selected="true">General QA</button>
+            <button class="track-tab" data-track="ec" role="tab" aria-selected="false">EC</button>
+            <button class="track-tab" data-track="cath" role="tab" aria-selected="false">CATH</button>
+            <button class="track-tab" data-track="design" role="tab" aria-selected="false">Design</button>
+          </div>
+          <div class="filter-row">
+            <label>搜索 accession、问题或标签<input id="search" type="search" placeholder="例如 zinc、IPR019323、A0A…"></label>
+            <label id="category-label">QA 类别<select id="category"><option value="">全部 16 类</option></select></label>
+          </div>
+        </div>
+        <div class="result-meta"><span id="result-count">正在载入真实数据…</span><span>每页 12 条</span></div>
+        <div id="samples" class="sample-grid" aria-live="polite"></div>
+        <div class="pager">
+          <button id="prev" class="button" disabled>← 上一页</button>
+          <span id="page-label">第 1 页</span>
+          <button id="next" class="button">下一页 →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="protocol-section" id="protocol">
+      <div class="wrap section">
+        <div class="section-heading light">
+          <div><p class="eyebrow">AUDITABLE BY DESIGN</p><h2>从来源到榜单，每一步可核验</h2></div>
+          <p>未通过同源性校验的数据不会静默标成正式 release。</p>
+        </div>
+        <ol class="pipeline">
+          <li><span>01</span><strong>时间过滤</strong><p>reviewed Swiss-Prot，并以 firstPublicDate 做切分。</p></li>
+          <li><span>02</span><strong>同源性搜索</strong><p>MMseqs2 对冻结历史 UniProtKB 搜索并记录哈希。</p></li>
+          <li><span>03</span><strong>证据抽取</strong><p>从 curator annotations、InterPro、Gene3D 生成标签。</p></li>
+          <li><span>04</span><strong>发布门槛</strong><p>Schema、唯一性、序列合法性和 &lt;30% 门控。</p></li>
+        </ol>
+        <div class="notice">
+          <strong>与原文不完全一致</strong>
+          <p>作者未公开 accession 清单、逐类配额、完整 paraphrase、CATH release 和 MMseqs2 coverage 参数。本项目复现公开协议与规模，不声称逐条还原私有 ProteinArena。</p>
+          <a href="docs/DEVIATIONS.md">查看完整偏差清单 →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="downloads">
+      <div class="section-heading">
+        <div><p class="eyebrow">OPEN DATA</p><h2>下载与复现</h2></div>
+        <p>JSONL 可直接用于评测；Python 构建器仅依赖标准库。</p>
+      </div>
+      <div class="download-grid">
+        <a href="data/releases/repro_2026/general_qa.jsonl" download><span>481 samples</span><strong>General QA</strong><small>16 categories · JSONL</small></a>
+        <a href="data/releases/repro_2026/ec.jsonl" download><span>413 samples</span><strong>EC Prediction</strong><small>single-label 4-level · JSONL</small></a>
+        <a href="data/releases/repro_2026/cath.jsonl" download><span>873 samples</span><strong>CATH Prediction</strong><small>Gene3D proxy · JSONL</small></a>
+        <a href="data/releases/repro_2026/design.jsonl" download><span>870 samples</span><strong>Functional Design</strong><small>InterPro-conditioned · JSONL</small></a>
+      </div>
+      <pre class="command"><code>git clone https://github.com/HanlardResearch/ProteinArena-Repro-2026.git
+cd ProteinArena-Repro-2026
+python3 -m unittest discover -s tests -v
+python3 -m proteinarena_repro validate --dataset data/releases/repro_2026</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div><strong>ProteinArena-Repro-2026</strong><p>Independent scientific reproduction. Not an official AMix-2 release.</p></div>
+      <div><a href="https://arxiv.org/abs/2605.30963">AMix-2 paper ↗</a><a href="https://www.uniprot.org/help/license">UniProt CC BY 4.0 ↗</a><a href="DATA_LICENSE.md">Data license</a></div>
+    </div>
+  </footer>
+  <script src="app.js" defer></script>
+</body>
+</html>

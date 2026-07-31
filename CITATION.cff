@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite this repository, AMix-2, and UniProt."
+title: "ProteinArena-Repro-2026"
+type: dataset
+version: 0.1.0-provisional
+date-released: 2026-07-31
+license: CC-BY-4.0
+repository-code: "https://github.com/HanlardResearch/ProteinArena-Repro-2026"
+url: "https://hanlardresearch.github.io/ProteinArena-Repro-2026/"
+authors:
+  - name: HanlardResearch contributors
+preferred-citation:
+  type: article
+  title: "AMix-2: Establishing Protein as a Native Modality in Large Language Models"
+  year: 2026
+  url: "https://arxiv.org/abs/2605.30963"
