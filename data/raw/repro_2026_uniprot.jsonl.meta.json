@@ -1,0 +1,27 @@
+{
+  "endpoint": "https://rest.uniprot.org/uniprotkb/search",
+  "query": "reviewed:true AND date_created:[2026-01-01 TO *]",
+  "downloaded": 1885,
+  "pages": [
+    {
+      "uniprot_release": "2026_02",
+      "uniprot_release_date": "10-June-2026",
+      "total_results": "1885"
+    },
+    {
+      "uniprot_release": "2026_02",
+      "uniprot_release_date": "10-June-2026",
+      "total_results": "1885"
+    },
+    {
+      "uniprot_release": "2026_02",
+      "uniprot_release_date": "10-June-2026",
+      "total_results": "1885"
+    },
+    {
+      "uniprot_release": "2026_02",
+      "uniprot_release_date": "10-June-2026",
+      "total_results": "1885"
+    }
+  ]
+}
