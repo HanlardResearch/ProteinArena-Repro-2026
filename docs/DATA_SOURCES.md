@@ -8,7 +8,7 @@
 - CATH：当前 UniProt Gene3D cross-reference（代理）；严格版应固定 CATH release mapping。
 - Design：当前 Swiss-Prot 的 InterPro accession 与 EntryName。
 
-下载器保存原始 JSONL、SHA-256，以及 API 响应头中的 `x-uniprot-release`、release date 和 total results。发布时不得只保存派生样本。
+下载器保存原始 JSONL、SHA-256，以及 API 响应头中的 `x-uniprot-release`、release date 和 total results。GitHub 发行版公开其无损 gzip 文件 `data/raw/repro_2026_uniprot.jsonl.gz`；解压后内容必须匹配 manifest 中的原始 SHA-256。发布时不得只保存派生样本。
 
 ## 历史同源性参考库
 
@@ -26,4 +26,3 @@
 - UniProt downloads: https://www.uniprot.org/help/downloads
 - UniProt previous releases: https://ftp.uniprot.org/pub/databases/uniprot/previous_releases/
 - InterProScan 5.75-106.0: https://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/5.75-106.0/
-
