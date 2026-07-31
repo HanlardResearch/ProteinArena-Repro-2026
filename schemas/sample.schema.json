@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/proteinarena-repro-2026/sample.schema.json",
+  "title": "ProteinArena-Repro-2026 sample",
+  "type": "object",
+  "required": ["sample_id", "benchmark", "profile", "track", "accession", "first_public_date", "sequence", "sequence_length", "homology_bin", "source", "builder_version"],
+  "properties": {
+    "sample_id": {"type": "string"},
+    "benchmark": {"const": "ProteinArena-Repro-2026"},
+    "profile": {"enum": ["repro_2026", "paper_2025"]},
+    "track": {"enum": ["general_qa", "ec", "cath", "design"]},
+    "accession": {"type": "string"},
+    "first_public_date": {"type": "string", "format": "date"},
+    "sequence": {"type": "string", "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"},
+    "sequence_length": {"type": "integer", "minimum": 1},
+    "max_historical_sequence_identity": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "homology_bin": {"enum": ["lt30", "30to50", "50to70", "70to100", "unverified"]},
+    "source": {
+      "type": "object",
+      "required": ["database", "url"],
+      "properties": {"database": {"type": "string"}, "url": {"type": "string"}}
+    },
+    "builder_version": {"type": "string"}
+  }
+}
