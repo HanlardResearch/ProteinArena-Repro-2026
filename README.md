@@ -49,6 +49,8 @@ python3 -m proteinarena_repro build --profile configs/repro_2026.json --allow-un
 - `manifest.json`：配置、输入哈希、计数、过滤状态和偏差；
 - `candidates.fasta`：通过时间条件的候选序列。
 
+原始 UniProt API 响应以 `data/raw/repro_2026_uniprot.jsonl.gz` 无损压缩公开；解压后 SHA-256 见 release manifest，API release 响应头保存在相邻 metadata JSON。
+
 任何未通过 `<30%` 历史同源性验证的数据都不会被标成正式 release。
 
 ## 许可
