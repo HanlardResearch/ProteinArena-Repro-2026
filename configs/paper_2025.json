@@ -1,0 +1,17 @@
+{
+  "name": "ProteinArena-Repro-2026",
+  "profile": "paper_2025",
+  "test_first_public_date_from": "2025-01-01",
+  "historical_reference_through": "2024-12-31",
+  "primary_max_sequence_identity_exclusive": 0.30,
+  "supplementary_identity_bins": [[0.30, 0.50], [0.50, 0.70], [0.70, 1.01]],
+  "reviewed_only": true,
+  "qa_target_size": 481,
+  "design_target_size": 870,
+  "max_sequence_length": 1024,
+  "random_seed": 2026,
+  "uniprot_page_size": 500,
+  "raw_path": "data/raw/paper_2025_uniprot.jsonl",
+  "interim_dir": "data/interim-paper-2025",
+  "release_dir": "data/releases/paper_2025"
+}
