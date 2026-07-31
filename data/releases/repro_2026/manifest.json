@@ -1,0 +1,91 @@
+{
+  "name": "ProteinArena-Repro-2026",
+  "profile": "repro_2026",
+  "created_at": "2026-07-31T09:01:30.700298+00:00",
+  "status": "provisional",
+  "config": {
+    "name": "ProteinArena-Repro-2026",
+    "profile": "repro_2026",
+    "test_first_public_date_from": "2026-01-01",
+    "historical_reference_through": "2025-12-31",
+    "primary_max_sequence_identity_exclusive": 0.3,
+    "supplementary_identity_bins": [
+      [
+        0.3,
+        0.5
+      ],
+      [
+        0.5,
+        0.7
+      ],
+      [
+        0.7,
+        1.01
+      ]
+    ],
+    "reviewed_only": true,
+    "qa_target_size": 481,
+    "design_target_size": 870,
+    "max_sequence_length": 1024,
+    "random_seed": 2026,
+    "uniprot_page_size": 500,
+    "raw_path": "data/raw/repro_2026_uniprot.jsonl",
+    "interim_dir": "data/interim",
+    "release_dir": "data/releases/repro_2026"
+  },
+  "input": {
+    "raw_path": "/Users/hanlard/Documents/Codex/2026-07-31/jie-2/ProteinArena-Repro-2026/data/raw/repro_2026_uniprot.jsonl",
+    "raw_sha256": "715f23e0ef1d206dc287e2e629db5f025c74130e4be44280b42875d22df061a9",
+    "records": 1885,
+    "api_metadata_path": "/Users/hanlard/Documents/Codex/2026-07-31/jie-2/ProteinArena-Repro-2026/data/raw/repro_2026_uniprot.jsonl.meta.json",
+    "api_metadata_sha256": "51923880335f92870dcd71b001c77d318ba4f88a57b5c7dae78c81415ea004b8",
+    "api_metadata": {
+      "endpoint": "https://rest.uniprot.org/uniprotkb/search",
+      "query": "reviewed:true AND date_created:[2026-01-01 TO *]",
+      "downloaded": 1885,
+      "pages": [
+        {
+          "uniprot_release": "2026_02",
+          "uniprot_release_date": "10-June-2026",
+          "total_results": "1885"
+        },
+        {
+          "uniprot_release": "2026_02",
+          "uniprot_release_date": "10-June-2026",
+          "total_results": "1885"
+        },
+        {
+          "uniprot_release": "2026_02",
+          "uniprot_release_date": "10-June-2026",
+          "total_results": "1885"
+        },
+        {
+          "uniprot_release": "2026_02",
+          "uniprot_release_date": "10-June-2026",
+          "total_results": "1885"
+        }
+      ]
+    }
+  },
+  "homology": {
+    "verified": false,
+    "tsv": null,
+    "tsv_sha256": null,
+    "complete_marker": null,
+    "run": null,
+    "threshold_exclusive": 0.3
+  },
+  "counts": {
+    "general_qa": 481,
+    "ec": 413,
+    "cath": 873,
+    "design": 870
+  },
+  "deviations": [
+    "Original accession list, per-category quotas, paraphrases, and extraction code were not released.",
+    "repro_2026 rolls the temporal split forward one year.",
+    "CATH labels use UniProt Gene3D cross-references as a proxy unless a frozen CATH mapping is supplied.",
+    "QA extraction rules are reconstructed; only cytoplasmic records without Signal/Transit features receive a conservative negative targeting label."
+  ],
+  "paper": "AMix-2: Establishing Protein as a Native Modality in Large Language Models, arXiv:2605.30963"
+}
