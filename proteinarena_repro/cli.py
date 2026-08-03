@@ -100,7 +100,14 @@ def cmd_validate(args: argparse.Namespace) -> None:
         for row in rows:
             if row["sample_id"] in seen: errors.append(f"duplicate sample_id {row['sample_id']}")
             seen.add(row["sample_id"])
-            if not pattern.fullmatch(row["sequence"]): errors.append(f"{row['sample_id']}: invalid sequence")
+            sequence_field = "reference_sequence" if track == "design" else "sequence"
+            length_field = "reference_sequence_length" if track == "design" else "sequence_length"
+            sequence = row.get(sequence_field, "")
+            if not pattern.fullmatch(sequence): errors.append(f"{row['sample_id']}: invalid {sequence_field}")
+            if row.get(length_field) != len(sequence): errors.append(f"{row['sample_id']}: {length_field} mismatch")
+            if track == "design":
+                if "sequence" in row: errors.append(f"{row['sample_id']}: design sequence must not be exposed as model input")
+                if row.get("reference_usage") != "audit_only_not_model_input": errors.append(f"{row['sample_id']}: missing reference usage guard")
             identity = row.get("max_historical_sequence_identity")
             if manifest["status"] == "official_candidate" and (identity is None or identity >= manifest["homology"]["threshold_exclusive"]):
                 errors.append(f"{row['sample_id']}: failed formal homology gate")

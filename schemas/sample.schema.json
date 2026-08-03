@@ -3,7 +3,7 @@
   "$id": "https://example.org/proteinarena-repro-2026/sample.schema.json",
   "title": "ProteinArena-Repro-2026 sample",
   "type": "object",
-  "required": ["sample_id", "benchmark", "profile", "track", "accession", "first_public_date", "sequence", "sequence_length", "homology_bin", "source", "builder_version"],
+  "required": ["sample_id", "benchmark", "profile", "track", "accession", "first_public_date", "homology_bin", "source", "builder_version"],
   "properties": {
     "sample_id": {"type": "string"},
     "benchmark": {"const": "ProteinArena-Repro-2026"},
@@ -13,6 +13,9 @@
     "first_public_date": {"type": "string", "format": "date"},
     "sequence": {"type": "string", "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"},
     "sequence_length": {"type": "integer", "minimum": 1},
+    "reference_sequence": {"type": "string", "pattern": "^[ACDEFGHIKLMNPQRSTVWY]+$"},
+    "reference_sequence_length": {"type": "integer", "minimum": 1},
+    "reference_usage": {"const": "audit_only_not_model_input"},
     "max_historical_sequence_identity": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
     "homology_bin": {"enum": ["lt30", "30to50", "50to70", "70to100", "unverified"]},
     "source": {
@@ -21,5 +24,15 @@
       "properties": {"database": {"type": "string"}, "url": {"type": "string"}}
     },
     "builder_version": {"type": "string"}
-  }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"track": {"const": "design"}}, "required": ["track"]},
+      "then": {
+        "required": ["prompt", "interpro", "reference_sequence", "reference_sequence_length", "reference_usage"],
+        "not": {"required": ["sequence"]}
+      },
+      "else": {"required": ["sequence", "sequence_length"]}
+    }
+  ]
 }

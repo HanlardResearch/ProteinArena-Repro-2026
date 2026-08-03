@@ -59,7 +59,7 @@ python3 evaluate_gpt.py
 - `general_qa.jsonl`：16 类自然语言问答；
 - `ec.jsonl`：四级 EC 分类；
 - `cath.jsonl`：四级 CATH 分类；
-- `design.jsonl`：InterPro 条件的功能蛋白设计；
+- `design.jsonl`：InterPro 条件的功能蛋白设计；模型输入仅为功能条件，天然序列以 `reference_sequence` 保存并明确标记为仅供审计；
 - `manifest.json`：配置、输入哈希、计数、过滤状态和偏差；
 - `candidates.fasta`：通过时间条件的候选序列。
 

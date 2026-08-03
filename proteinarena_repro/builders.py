@@ -85,10 +85,17 @@ def build_all(entries: list[dict], identities: dict[str, float] | None, profile:
         if ipr and len(seq) <= profile["max_sequence_length"]:
             names = [name for _, name in ipr]
             row = _base(entry, "design", "interpro", identity, profile)
+            # Design is conditioned only on InterPro function labels.  The natural
+            # Swiss-Prot sequence is retained for provenance/audit and must never be
+            # represented as model input.
+            row.pop("sequence")
+            row.pop("sequence_length")
             row.update({"interpro": [{"id": i, "name": n} for i, n in ipr],
                         "prompt": "Generate a protein sequence for a novel protein that integrates the following function keywords: " + "; ".join(names) + ". The designed protein sequence is",
                         "output_constraint": "exactly one uppercase standard-amino-acid sequence, length <= 1024",
-                        "reference_sequence": seq})
+                        "reference_sequence": seq,
+                        "reference_sequence_length": len(seq),
+                        "reference_usage": "audit_only_not_model_input"})
             tracks["design"].append(row)
     tracks["general_qa"] = balance_qa(tracks["general_qa"], profile["qa_target_size"], profile["random_seed"])
     tracks["design"] = stable_limit(tracks["design"], profile["design_target_size"], profile["random_seed"])

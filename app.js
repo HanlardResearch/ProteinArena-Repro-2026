@@ -71,13 +71,15 @@ function sampleCard(row) {
   if (row.track !== "design") {
     const answer = document.createElement("p"); answer.className = "answer";
     answer.textContent = `Gold · ${row.answer || row.label}`; article.append(answer);
+    article.append(field("Input sequence", row.sequence, "sequence"));
   } else {
     article.append(field("InterPro constraints", row.interpro.map(x => `${x.id} · ${x.name}`).join("; ")));
+    article.append(field("Natural reference sequence · audit only, not provided to the model", row.reference_sequence, "sequence"));
   }
-  article.append(field("Input sequence", row.sequence, "sequence"));
   const evidence = row.evidence?.join("; ") || (row.track === "design" ? "Swiss-Prot InterPro cross-references" : row.mapping_type || "Structured annotation");
   article.append(field("Evidence", evidence));
-  article.append(field("Audit", `${row.first_public_date} · ${row.homology_bin} · ${row.sequence_length} aa`));
+  const sequenceLength = row.track === "design" ? row.reference_sequence_length : row.sequence_length;
+  article.append(field("Audit", `${row.first_public_date} · ${row.homology_bin} · ${sequenceLength} aa`));
   return article;
 }
 

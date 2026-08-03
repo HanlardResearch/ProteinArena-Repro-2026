@@ -12,4 +12,4 @@
 8. **设计关键词选择。** 原文说明使用 expert-reviewed InterPro keywords，但未发布“关键词”的具体字段、组合与去重规则。本项目直接采用记录中 InterPro accession/name，确定性去重。
 9. **语义评分器。** 原文的 General QA 依赖语义等价判断，但没有公开完整 judge rubric、版本锁定输出和全部参考答案。本项目保留结构化 gold/evidence，judge 需另行版本锁定。
 10. **完整设计工具链较重。** ESMFold-v1、InterProScan-5.75-106.0 和全量 MMseqs2 数据库不随仓库分发；未运行这些工具时只输出 core metrics，不得宣称完整复现论文设计分数。
-11. **自然序列不是设计答案。** `reference_sequence` 只用于离线评估，模型输入不会泄露它；训练或 few-shot 使用时必须另做去污染审计。
+11. **自然序列不是设计输入或唯一答案。** `reference_sequence` 只用于来源审计和自然序列基线，模型输入不会泄露它；训练或 few-shot 使用时必须另做去污染审计。

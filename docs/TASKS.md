@@ -43,5 +43,9 @@ Generate a protein sequence for a novel protein that integrates the following fu
 
 自回归模型应只返回一条大写标准氨基酸序列，长度不超过 1024。论文对 AMix-2 AR 使用 `temperature=0.7, top_p=0.6`；理解任务为 `temperature=0.7, top_p=0.5, max_tokens=4096`。其他模型应同时报告实际采样参数。
 
-设计评测复现：Rep2/Rep5、序列有效性、唯一性；完整复现还需 ESMFold-v1 pLDDT、InterProScan 5.75-106.0 功能恢复率、MMseqs2 对历史 UniProt 的 novelty。
+Design 的模型输入只有上述 InterPro 功能条件，不包含任何天然氨基酸序列。数据记录中的
+`reference_sequence` 和 `reference_sequence_length` 来自同一条 Swiss-Prot 来源记录，仅用于
+来源审计和自然序列基线，`reference_usage` 固定为 `audit_only_not_model_input`。它们不得拼接进
+模型 prompt，也不得作为序列编辑或续写的起点。
 
+设计评测复现：Rep2/Rep5、序列有效性、唯一性；完整复现还需 ESMFold-v1 pLDDT、InterProScan 5.75-106.0 功能恢复率、MMseqs2 对历史 UniProt 的 novelty。
