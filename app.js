@@ -78,6 +78,7 @@ function sampleCard(row) {
   }
   const evidence = row.evidence?.join("; ") || (row.track === "design" ? "Swiss-Prot InterPro cross-references" : row.mapping_type || "Structured annotation");
   article.append(field("Evidence", evidence));
+  if (row.template_count) article.append(field("Template", `${row.template_index + 1} / ${row.template_count}`));
   const sequenceLength = row.track === "design" ? row.reference_sequence_length : row.sequence_length;
   article.append(field("Audit", `${row.first_public_date} · ${row.homology_bin} · ${sequenceLength} aa`));
   return article;

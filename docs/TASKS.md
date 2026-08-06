@@ -10,6 +10,8 @@ General Protein QA 沿用论文 5 个维度、16 类：
 | Physicochemical Property | hydrophobicity |
 | Structure | structural_composition, transmembrane_type |
 
+每个精确子任务维护20个语义等价的英文问法；构建时按 `random_seed + sample_id` 确定性选择一个，并在样本中记录 `template_index` 和 `template_count`。QA共16类，因此共有320个QA模板。
+
 通用输入模板：
 
 ```text
@@ -19,7 +21,7 @@ The protein is {SEQUENCE}
 
 输出为简短自然语言答案。标签与 `evidence` 来自同一条 Swiss-Prot 记录。为避免把缺失注释误当阴性，本复现默认只构造有明确正证据的样本。
 
-EC 模板：
+EC 模板（20个等价问法）：
 
 ```text
 Determine the most appropriate four-level EC number for the protein whose amino-acid sequence is provided. The protein is {SEQUENCE}
@@ -27,7 +29,7 @@ Determine the most appropriate four-level EC number for the protein whose amino-
 
 输出严格为 `x.x.x.x`。若一条蛋白有多个 EC，分别生成带唯一 sample_id 的样本并在 manifest 统计多标签来源。
 
-CATH 模板：
+CATH 模板（20个等价问法）：
 
 ```text
 Determine the most probable CATH hierarchical classification (x.x.x.x) for the provided protein sequence. The protein is {SEQUENCE}
@@ -35,7 +37,7 @@ Determine the most probable CATH hierarchical classification (x.x.x.x) for the p
 
 输出严格为 `x.x.x.x`。本实现优先读取 UniProt 的 Gene3D 四段式交叉引用；可额外接入冻结 CATH 映射表。Gene3D 与 CATH 官方 domain assignment 并不完全等价，因此单列为偏差。
 
-Functional De Novo Design 模板：
+Functional De Novo Design 模板（20个等价问法）：
 
 ```text
 Generate a protein sequence for a novel protein that integrates the following function keywords: {INTERPRO_NAMES}. The designed protein sequence is
