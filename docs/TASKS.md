@@ -12,7 +12,7 @@ General Protein QA 沿用论文 5 个维度、16 类：
 
 每个精确子任务维护20个语义等价的英文问法；构建时按 `random_seed + sample_id` 确定性选择一个，并在样本中记录 `template_index` 和 `template_count`。QA共16类，因此共有320个QA模板。
 
-每条 release 样本还包含英文 `rationale`。它是面向训练/审计的短篇模型式推理：根据输入序列的长度、组成和可解释的序列模式，结合该样本的 gold answer/evidence 组织出自洽的生化推导。`rationale` 不会加入模型测评 prompt，也不直接提及 UniProt 字段名、数据库 ID 或“某字段等于某值”的外部查表过程；它不是原始 Swiss-Prot 注释，而是由构建器确定性生成的辅助文本。
+每条 release 样本还包含英文 `rationale`。它是面向训练/审计的短篇模型式推理：根据输入序列的长度、组成和可解释的序列模式，结合由 evidence 归一化得到的 gold answer 组织出自洽的生化推导。`rationale` 不会加入模型测评 prompt，也不直接提及 UniProt 字段名、数据库 ID 或“某字段等于某值”的外部查表过程；它不是原始 Swiss-Prot 注释，而是由构建器确定性生成的辅助文本。
 
 通用输入模板：
 

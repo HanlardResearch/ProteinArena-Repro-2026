@@ -86,7 +86,8 @@ def cmd_build(args: argparse.Namespace) -> None:
             "language": "English",
             "style": "short sequence-grounded model-style reasoning",
             "included_in_model_prompt": False,
-            "source_fields_used_for_generation": ["sequence", "answer/label", "evidence", "InterPro names for design"],
+            "source_fields_used_for_generation": ["sequence", "normalized answer/label", "InterPro names for design"],
+            "evidence_role": "evidence is retained for audit and is normalized into the gold answer; raw database wording is not copied into the rationale",
         },
         "deviations": deviations,
         "paper": "AMix-2: Establishing Protein as a Native Modality in Large Language Models, arXiv:2605.30963"
