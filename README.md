@@ -3,6 +3,7 @@
 ProteinArena-Repro-2026 是对 AMix-2 论文中 ProteinArena 的**科学复现工程**，不是官方数据集，也不声称重建出作者未公开的私有样本。
 
 - 在线数据浏览器：https://hanlardresearch.github.io/ProteinArena-Repro-2026/
+- 40 条源数据一致性审计：https://hanlardresearch.github.io/ProteinArena-Repro-2026/audit.html
 - GitHub：https://github.com/HanlardResearch/ProteinArena-Repro-2026
 
 它复现论文公开描述的核心协议：
@@ -28,6 +29,7 @@ python3 -m proteinarena_repro build --profile configs/repro_2026.json \
   --homology-tsv data/interim/homology.tsv \
   --homology-complete-marker data/interim/homology.tsv.complete.json
 python3 -m proteinarena_repro validate --dataset data/releases/repro_2026
+python3 scripts/build_pair_audit.py
 ```
 
 仅用于检查解析器的真实数据 smoke test 可以显式跳过同源性门控；其产物会被强制标记为 `provisional`，不得用于正式榜单：

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ProteinArena-Repro-2026 构建样例与原始 UniProtKB/Swiss-Prot JSON 的逐条一致性审计。">
+  <title>数据一致性审计 · ProteinArena-Repro-2026</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="audit.css">
+</head>
+<body>
+  <header class="audit-hero">
+    <nav class="nav wrap" aria-label="审计导航">
+      <a class="brand" href="index.html"><span class="brand-mark">PA</span><span>ProteinArena-Repro-2026</span></a>
+      <div class="nav-links"><a href="index.html">返回数据集</a><a href="data/audit/source_pair_audit.json">下载审计 JSON</a><a class="github-link" href="https://github.com/HanlardResearch/ProteinArena-Repro-2026">GitHub ↗</a></div>
+    </nav>
+    <div class="wrap audit-intro">
+      <div><p class="eyebrow">SOURCE PAIR AUDIT</p><h1>构建样例与原始记录，<br>逐条并排核验</h1></div>
+      <p>四个大任务各固定抽取 10 条。左侧是 release 中的测评样例，右侧是同 accession 的完整 UniProtKB/Swiss-Prot 原始 JSON。</p>
+    </div>
+  </header>
+
+  <main class="wrap audit-main">
+    <section id="audit-summary" class="audit-summary" aria-live="polite"><p>正在载入审计数据…</p></section>
+    <section class="audit-controls" aria-label="审计样例筛选">
+      <div class="track-tabs" role="tablist">
+        <button class="track-tab active" data-track="general_qa" role="tab" aria-selected="true">General QA</button>
+        <button class="track-tab" data-track="ec" role="tab" aria-selected="false">EC</button>
+        <button class="track-tab" data-track="cath" role="tab" aria-selected="false">CATH</button>
+        <button class="track-tab" data-track="design" role="tab" aria-selected="false">Design</button>
+      </div>
+      <label>选择样例<select id="audit-sample"></select></label>
+    </section>
+
+    <section id="audit-detail" class="audit-detail" aria-live="polite"></section>
+    <section id="audit-list" class="audit-list" aria-label="当前任务十条样例"></section>
+  </main>
+
+  <footer><div class="wrap footer-grid"><div><strong>Source Pair Audit</strong><p>原始记录来自仓库公开的、未经改写的 UniProt API JSONL。</p></div><div><a href="index.html">数据浏览器</a><a href="docs/PROTOCOL.md">复现协议</a></div></div></footer>
+  <script src="audit.js" defer></script>
+</body>
+</html>
