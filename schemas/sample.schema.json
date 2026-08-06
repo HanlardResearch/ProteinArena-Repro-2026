@@ -3,7 +3,7 @@
   "$id": "https://example.org/proteinarena-repro-2026/sample.schema.json",
   "title": "ProteinArena-Repro-2026 sample",
   "type": "object",
-  "required": ["sample_id", "benchmark", "profile", "track", "accession", "first_public_date", "homology_bin", "source", "builder_version"],
+  "required": ["sample_id", "benchmark", "profile", "track", "accession", "first_public_date", "homology_bin", "source", "builder_version", "rationale"],
   "properties": {
     "sample_id": {"type": "string"},
     "benchmark": {"const": "ProteinArena-Repro-2026"},
@@ -23,7 +23,8 @@
       "required": ["database", "url"],
       "properties": {"database": {"type": "string"}, "url": {"type": "string"}}
     },
-    "builder_version": {"type": "string"}
+    "builder_version": {"type": "string"},
+    "rationale": {"type": "string", "minLength": 40}
   },
   "allOf": [
     {

@@ -80,7 +80,15 @@ def cmd_build(args: argparse.Namespace) -> None:
                       "complete_marker": str(args.homology_complete_marker) if args.homology_complete_marker else None,
                       "run": homology_marker,
                       "threshold_exclusive": profile["primary_max_sequence_identity_exclusive"]},
-        "counts": counts, "deviations": deviations,
+        "counts": counts,
+        "rationales": {
+            "enabled": True,
+            "language": "English",
+            "style": "short sequence-grounded model-style reasoning",
+            "included_in_model_prompt": False,
+            "source_fields_used_for_generation": ["sequence", "answer/label", "evidence", "InterPro names for design"],
+        },
+        "deviations": deviations,
         "paper": "AMix-2: Establishing Protein as a Native Modality in Large Language Models, arXiv:2605.30963"
     }
     (release / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -105,6 +113,9 @@ def cmd_validate(args: argparse.Namespace) -> None:
             sequence = row.get(sequence_field, "")
             if not pattern.fullmatch(sequence): errors.append(f"{row['sample_id']}: invalid {sequence_field}")
             if row.get(length_field) != len(sequence): errors.append(f"{row['sample_id']}: {length_field} mismatch")
+            rationale = row.get("rationale", "")
+            if not isinstance(rationale, str) or len(rationale.strip()) < 40:
+                errors.append(f"{row['sample_id']}: missing or too-short rationale")
             if track == "design":
                 if "sequence" in row: errors.append(f"{row['sample_id']}: design sequence must not be exposed as model input")
                 if row.get("reference_usage") != "audit_only_not_model_input": errors.append(f"{row['sample_id']}: missing reference usage guard")

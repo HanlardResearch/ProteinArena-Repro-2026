@@ -78,6 +78,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.08; letter-spa
 .field strong { display: block; margin-bottom: 4px; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .field p { margin: 0; font-size: 12px; }
 .sequence { max-height: 68px; overflow: auto; word-break: break-all; color: #29463a; font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.rationale { max-height: 180px; overflow: auto; color: #33463d; line-height: 1.6; }
 .pager { display: flex; align-items: center; justify-content: center; gap: 18px; padding: 20px; border-top: 1px solid var(--line); }
 .pager span { color: var(--muted); font-size: 12px; }
 .button:disabled { opacity: .4; cursor: not-allowed; transform: none; }

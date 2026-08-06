@@ -6,6 +6,7 @@ from collections import defaultdict
 
 from .annotations import cath_codes, ec_numbers, interpro, qa_labels, valid_sequence
 from .homology import identity_bin
+from .rationales import build_rationale
 
 QUESTIONS = {
     "enzyme_classification": [
@@ -277,7 +278,7 @@ def _base(entry: dict, track: str, suffix: str, identity: float | None, profile:
         "max_historical_sequence_identity": identity,
         "homology_bin": identity_bin(identity, profile["primary_max_sequence_identity_exclusive"]) if identity is not None else "unverified",
         "source": {"database": "UniProtKB/Swiss-Prot", "url": f"https://rest.uniprot.org/uniprotkb/{acc}.json"},
-        "builder_version": "0.1.0"
+        "builder_version": "0.2.0"
     }
 
 
@@ -300,6 +301,7 @@ def build_all(entries: list[dict], identities: dict[str, float] | None, profile:
                         "prompt": f"{question}\nThe protein is {seq}", "answer": answer,
                         "template_index": template_index, "template_count": len(QUESTIONS[category]),
                         "evidence": evidence, "label_origin": "current Swiss-Prot structured annotation/curator text"})
+            row["rationale"] = build_rationale(row)
             tracks["general_qa"].append(row)
         ecs = ec_numbers(entry)
         for code in ecs if len(ecs) == 1 else []:
@@ -308,6 +310,7 @@ def build_all(entries: list[dict], identities: dict[str, float] | None, profile:
             row.update({"label": code, "prompt": f"{template}\nThe protein is {seq}",
                         "template_index": template_index, "template_count": len(EC_TEMPLATES),
                         "answer_format": "x.x.x.x", "evidence": [f"Swiss-Prot EC {code}"]})
+            row["rationale"] = build_rationale(row)
             tracks["ec"].append(row)
         caths = cath_codes(entry)
         for code in caths if len(caths) == 1 else []:
@@ -316,6 +319,7 @@ def build_all(entries: list[dict], identities: dict[str, float] | None, profile:
             row.update({"label": code, "prompt": f"{template}\nThe protein is {seq}",
                         "template_index": template_index, "template_count": len(CATH_TEMPLATES),
                         "answer_format": "x.x.x.x", "evidence": [f"UniProt Gene3D cross-reference {code}"], "mapping_type": "Gene3D proxy"})
+            row["rationale"] = build_rationale(row)
             tracks["cath"].append(row)
         ipr = interpro(entry)
         if ipr and len(seq) <= profile["max_sequence_length"]:
@@ -334,6 +338,7 @@ def build_all(entries: list[dict], identities: dict[str, float] | None, profile:
                         "reference_sequence": seq,
                         "reference_sequence_length": len(seq),
                         "reference_usage": "audit_only_not_model_input"})
+            row["rationale"] = build_rationale(row)
             tracks["design"].append(row)
     tracks["general_qa"] = balance_qa(tracks["general_qa"], profile["qa_target_size"], profile["random_seed"])
     tracks["design"] = stable_limit(tracks["design"], profile["design_target_size"], profile["random_seed"])

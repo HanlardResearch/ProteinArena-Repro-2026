@@ -1,7 +1,7 @@
 {
   "name": "ProteinArena-Repro-2026",
   "profile": "repro_2026",
-  "created_at": "2026-08-06T02:51:06.242521+00:00",
+  "created_at": "2026-08-06T03:22:13.847789+00:00",
   "status": "provisional",
   "config": {
     "name": "ProteinArena-Repro-2026",
@@ -80,6 +80,18 @@
     "ec": 413,
     "cath": 873,
     "design": 870
+  },
+  "rationales": {
+    "enabled": true,
+    "language": "English",
+    "style": "short sequence-grounded model-style reasoning",
+    "included_in_model_prompt": false,
+    "source_fields_used_for_generation": [
+      "sequence",
+      "answer/label",
+      "evidence",
+      "InterPro names for design"
+    ]
   },
   "deviations": [
     "Original accession list, per-category quotas, paraphrases, and extraction code were not released.",
